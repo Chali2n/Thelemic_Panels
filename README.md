@@ -7,6 +7,17 @@ Four Android home-screen widgets for Augusta, Maine (44.3106, -69.7795, `America
 3. **Liber Resh**: today's four adoration times for Augusta: sunrise, noon, sunset and midnight.
 4. **Planetary Hours**: the planet ruling the current hour, with a countdown to the next ones, using the traditional Chaldean order.
 
+## Install
+
+A debug build is committed here as
+[thelemic-panels-1.0-debug.apk](thelemic-panels-1.0-debug.apk), so it can be sideloaded without a
+toolchain: download it on the phone, tap it, and allow "install unknown apps" for whichever app
+opens it. With a cable: `adb install -r thelemic-panels-1.0-debug.apk`. Android 8.0 (API 26) or
+newer.
+
+Then add the panels from the home-screen widget picker, or open the app and use the four
+"Add …" buttons where the launcher supports pinning.
+
 ## Building
 
 Needs JDK 17 and an Android SDK with `platforms;android-35` and `build-tools;35.0.0`.
@@ -51,3 +62,36 @@ more or fewer rows.
 | Lunar Calendar | 4×3 | headline, phase and sign cells, next New and Full Moons |
 | Liber Resh | 4×4 | next adoration with a live countdown, then the following ones |
 | Planetary Hours | 4×3 | next hour with a live countdown, then the two after it |
+
+## Testing
+
+`./gradlew :app:testDebugUnitTest` runs 14 JVM tests in
+[AstronomyTest.kt](app/src/test/java/com/chali2n/thelemicpanels/AstronomyTest.kt). They pin one
+past reading for Augusta, a Sunday at 16:19, so they never drift with the calendar: sunrise
+6:27 AM, sunset 4:19 PM, solar noon and solar midnight, the Moon at 11° Scorpii and under 1%
+lit, the next New Moon, the named Full Moon, the four Resh stations, the whole 24-hour Chaldean
+chain across a day change, the daylight-saving transition, sign ingresses, and the text each
+panel renders. The widgets always read the device clock; nothing in them uses that fixture.
+
+The tests caught one real bug: phases were banded by angle, so a 0.5% crescent the day before
+New Moon was labelled "New Moon". The principal names now apply only on the day of the event,
+and the rest of the month reads Waxing/Waning Crescent, Quarter or Gibbous.
+
+## Limitations
+
+- Third-party widgets cannot blur the wallpaper, so the cards are translucent white rather than
+  frosted like the reference screenshots. They will look washed out over a bright photo.
+- The committed APK is debug-signed. Installing a later build signed with a different key means
+  uninstalling this one first.
+- Liber Resh and Planetary Hours refresh on a 15-minute floor, the smallest interval WorkManager
+  allows, so a station can linger for up to that long after its time passes.
+
+## Layout
+
+`app/src/main/java/com/chali2n/thelemicpanels/`
+
+- `Astro.kt`: Astronomy Engine wrapper, phase naming, sign and degree helpers
+- `Lunar.kt`, `Resh.kt`, `Hours.kt`, `Thelemic.kt`: one panel builder each
+- `WidgetRender.kt`: computes, caches and paints the `RemoteViews`
+- `Widgets.kt`: the four providers; `WidgetScheduler.kt` and `RefreshWorker.kt`: refresh timing
+- `Cache.kt`: last good state per widget, so a failed refresh never blanks a panel
