@@ -3,5 +3,3 @@
 2. **Lunar Calendar**: the Moon's phase, how much of it is lit, and its sign, plus the next New and Full Moons. Updates every 6 hours.
 3. **Liber Resh**: today's four adoration times for Augusta: sunrise, noon, sunset and midnight. Updates daily just after midnight.
 4. **Planetary Hours**: the planet ruling the current hour, with a countdown to the next ones, using the traditional Chaldean order. Updates every 6 hours.
-
-All four are set for Augusta, Maine. Your weather card sits alongside them.
