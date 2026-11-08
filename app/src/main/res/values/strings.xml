@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Thelemic Panels</string>
+
+    <string name="panel_date">Thelemic Date</string>
+    <string name="panel_lunar">Lunar Calendar</string>
+    <string name="panel_resh">Liber Resh</string>
+    <string name="panel_hours">Planetary Hours</string>
+
+    <string name="panel_date_description">Sun and Moon by sign and degree, the Latin weekday, and the year of the New Aeon.</string>
+    <string name="panel_lunar_description">Moon phase and illumination, the Moon\'s sign, and the next New and Full Moons.</string>
+    <string name="panel_resh_description">The four solar adorations for Augusta, Maine: sunrise, noon, sunset and solar midnight.</string>
+    <string name="panel_hours_description">The ruling planet of the current hour, with the hours that follow.</string>
+
+    <string name="cta_era_legis">Open Era Legis</string>
+    <string name="refreshing">Refreshing panels…</string>
+    <string name="pin_unsupported">This launcher cannot pin widgets from an app. Add it from the widget picker instead.</string>
+
+    <string name="intro">Four panels computed for Augusta, Maine. Add them to your home screen:</string>
+    <string name="add_date">Add Thelemic Date</string>
+    <string name="add_lunar">Add Lunar Calendar</string>
+    <string name="add_resh">Add Liber Resh</string>
+    <string name="add_hours">Add Planetary Hours</string>
+    <string name="refresh_now">Refresh now</string>
+    <string name="footer">Times are America/New_York. Tap any panel to refresh it.</string>
+
+    <!-- Sample text for widget picker previews; replaced at runtime. -->
+    <string name="sample_date">☉︎ in 16° Scorpii : ☽︎ in 11° Scorpii : dies Solis : Anno Ⅴⅹⅰⅰ æræ legis</string>
+    <string name="sample_lunar_summary">Waning Crescent Moon in Scorpio all day.</string>
+    <string name="sample_lunar_phase">Waning Crescent</string>
+    <string name="sample_lunar_lit">0.5% lit</string>
+    <string name="sample_lunar_sign_caption">Moon Sign</string>
+    <string name="sample_lunar_sign">Scorpio</string>
+    <string name="sample_lunar_new_when">Tomorrow 2:02 AM</string>
+    <string name="sample_lunar_new">New Moon</string>
+    <string name="sample_lunar_full_when">Nov 24 9:53 AM</string>
+    <string name="sample_lunar_full">Full Moon • Beaver Moon</string>
+    <string name="sample_resh_summary">Tum in 4 min – then Khephra at 11:22 PM and Ra at 6:27 AM.</string>
+    <string name="sample_resh_time">4:19 PM</string>
+    <string name="sample_resh_name">Tum</string>
+    <string name="sample_resh_detail">Sunset</string>
+    <string name="sample_hours_summary">♃ Jupiter in 5 min – then ♂ Mars at 5:30 PM and ☉ Sun at 6:41 PM.</string>
+    <string name="sample_hours_name">♃ Jupiter</string>
+    <string name="sample_hours_detail">Night hour 1 • follows ♄ Saturn</string>
+</resources>

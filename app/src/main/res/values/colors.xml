@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ink">#E6000000</color>
+    <color name="ink_soft">#CC000000</color>
+    <color name="ink_muted">#8A000000</color>
+    <color name="tile_fill">#8CFFFFFF</color>
+    <color name="cta_fill">#A8FFFFFF</color>
+    <color name="launcher_bg">#1B2A4A</color>
+</resources>
