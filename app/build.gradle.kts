@@ -11,8 +11,8 @@ android {
         applicationId = "com.chali2n.thelemicpanels"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
     }
 
     buildTypes {
@@ -36,6 +36,7 @@ android {
 
     testOptions {
         unitTests.isReturnDefaultValues = true
+        unitTests.isIncludeAndroidResources = true
     }
 }
 
@@ -44,4 +45,5 @@ dependencies {
     implementation("androidx.work:work-runtime-ktx:2.9.1")
     implementation("io.github.cosinekitty:astronomy:2.1.19")
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.robolectric:robolectric:4.14.1")
 }

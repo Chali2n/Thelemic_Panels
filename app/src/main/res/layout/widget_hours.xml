@@ -30,7 +30,9 @@
             android:textColor="@color/ink_soft"
             android:textSize="14sp" />
 
-        <View
+        <!-- A spacer has to be a @RemoteView class; a bare View is rejected by
+             RemoteViews inflation and takes the whole panel down with it. -->
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />

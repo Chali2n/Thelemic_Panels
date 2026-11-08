@@ -10,10 +10,10 @@ Four Android home-screen widgets for Augusta, Maine (44.3106, -69.7795, `America
 ## Install
 
 A debug build is committed here as
-[thelemic-panels-1.0-debug.apk](thelemic-panels-1.0-debug.apk), so it can be sideloaded without a
+[thelemic-panels-1.1-debug.apk](thelemic-panels-1.1-debug.apk), so it can be sideloaded without a
 toolchain: download it on the phone, tap it, and allow "install unknown apps" for whichever app
-opens it. With a cable: `adb install -r thelemic-panels-1.0-debug.apk`. Android 8.0 (API 26) or
-newer.
+opens it. With a cable: `adb install -r thelemic-panels-1.1-debug.apk`. Android 8.0 (API 26) or
+newer. It installs over 1.0 as an update, since both are signed with the same debug key.
 
 Then add the panels from the home-screen widget picker, or open the app and use the four
 "Add …" buttons where the launcher supports pinning.
@@ -76,6 +76,13 @@ panel renders. The widgets always read the device clock; nothing in them uses th
 The tests caught one real bug: phases were banded by angle, so a 0.5% crescent the day before
 New Moon was labelled "New Moon". The principal names now apply only on the day of the event,
 and the rest of the month reads Waxing/Waning Crescent, Quarter or Gibbous.
+
+[WidgetInflateTest.kt](app/src/test/java/com/chali2n/thelemicpanels/WidgetInflateTest.kt) runs
+each panel's `RemoteViews` through `apply()` under Robolectric, which is what a launcher does.
+That test found the cause of the first build's **"Couldn't add widget"**: each header row ended
+in a bare `<View>` spacer, and `RemoteViews` only inflates classes annotated `@RemoteView`
+(`View` and `Space` are not), so the whole layout threw `InflateException` in the launcher's
+process. The spacer is now a `FrameLayout`.
 
 ## Limitations
 

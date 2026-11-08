@@ -84,7 +84,7 @@ object WidgetRender {
         PanelKind.HOURS -> Hours.panel(nowMs)
     }
 
-    private fun placeholder(kind: PanelKind): Panel = Panel(
+    internal fun placeholder(kind: PanelKind): Panel = Panel(
         kind = kind,
         summary = listOf(Seg.muted("—")),
         emptyText = if (kind == PanelKind.DATE) null else "Updating…",
@@ -92,7 +92,7 @@ object WidgetRender {
         ctaUrl = if (kind == PanelKind.DATE) Thelemic.CTA_URL else null,
     )
 
-    private fun build(
+    internal fun build(
         context: Context,
         kind: PanelKind,
         panel: Panel,
