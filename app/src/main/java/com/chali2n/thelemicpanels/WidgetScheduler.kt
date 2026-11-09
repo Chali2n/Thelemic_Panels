@@ -13,9 +13,9 @@ object WidgetScheduler {
     const val ACTION_REFRESH = "com.chali2n.thelemicpanels.action.REFRESH"
 
     /**
-     * The date panel changes every two hours, the lunar panel slowly, but the two
-     * countdown panels must drop items as their times pass, so they refresh every
-     * fifteen minutes (the shortest interval WorkManager allows).
+     * The date panel changes every two hours, the lunar panel slowly, but Resh and
+     * the planetary hours must drop a station or an hour as its time passes, so they
+     * refresh every fifteen minutes (the shortest interval WorkManager allows).
      */
     fun onWidgetActive(context: Context) {
         val workManager = WorkManager.getInstance(context)
