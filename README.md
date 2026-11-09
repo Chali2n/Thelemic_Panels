@@ -10,11 +10,11 @@ Four Android home-screen widgets for Augusta, Maine (44.3106, -69.7795, `America
 ## Install
 
 A debug build is committed here as
-[thelemic-panels-1.3-debug.apk](thelemic-panels-1.3-debug.apk), so it can be sideloaded without a
-toolchain: download it on the phone, tap it, and allow "install unknown apps" for whichever app
-opens it. With a cable: `adb install -r thelemic-panels-1.3-debug.apk`. Android 8.0 (API 26) or
-newer. It installs over an earlier build as an update, since every build is signed with the same
-debug key.
+[thelemic-panels-1.4-dark-debug.apk](thelemic-panels-1.4-dark-debug.apk), so it can be sideloaded
+without a toolchain: download it on the phone, tap it, and allow "install unknown apps" for
+whichever app opens it. With a cable: `adb install -r thelemic-panels-1.4-dark-debug.apk`.
+Android 8.0 (API 26) or newer. It installs over an earlier build as an update, since every build is
+signed with the same debug key. The app screen shows the installed version at the bottom.
 
 Then add the panels from the home-screen widget picker, or open the app and use the four
 "Add …" buttons where the launcher supports pinning.
@@ -48,16 +48,17 @@ echo "sdk.dir=$ANDROID_HOME" > local.properties
   hours; hour 1 of the day belongs to the weekday's planet and the rest follow the Chaldean
   order: ♄ ♃ ♂ ☉ ♀ ☿ ☽.
 
-### Light and dark
+### Dark glass, always
 
-Every panel exists twice, as a light card and a dark one, so the widget picker lists eight entries
-under Thelemic Panels: `Thelemic Date` and `Thelemic Date (Dark)`, and the same for the other
-three. The dark cards are the same geometry and the same glass — 26dp corners over a translucent
-fill — with the fill taken to near-black and the ink to near-white, low chroma so the wallpaper's
-colour still reads through. They are separate providers rather than one panel that follows the
-system theme, so a dark panel stays dark while the phone is in light mode, and both skins can sit
-on one screen. Both skins of a kind share one computation and one cache entry and repaint in the
-same pass, so the extra skin costs no work; tapping either refreshes both.
+Every panel is a dark card: 26dp corners over a translucent near-black fill with near-white ink,
+low chroma so the wallpaper's colour still reads through. There is no light variant to choose
+between, and the panels do not follow the system theme — a dark panel stays dark while the phone
+is in light mode. The widget picker lists exactly four entries under Thelemic Panels, and the app
+screen is dark for the same reason.
+
+The panels kept their original provider class names when the light ones were dropped, so widgets
+already pinned to a home screen keep their ids and simply repaint dark instead of being removed by
+the launcher.
 
 ### Refresh cadence
 
@@ -92,10 +93,9 @@ New Moon was labelled "New Moon". The principal names now apply only on the day 
 and the rest of the month reads Waxing/Waning Crescent, Quarter or Gibbous.
 
 [WidgetInflateTest.kt](app/src/test/java/com/chali2n/thelemicpanels/WidgetInflateTest.kt) runs
-each panel's `RemoteViews`, in both skins and both as a placeholder and with live data, through
-`apply()` under Robolectric, which is what a launcher does; it also checks that each skin paints
-its own ink, so a missing colour in a dark layout fails the build, and that no panel ships a
-`Chronometer`.
+each panel's `RemoteViews`, both as a placeholder and with live data, through `apply()` under
+Robolectric, which is what a launcher does; it also checks that every panel paints the dark ink,
+so a missing colour in a layout fails the build, and that no panel ships a `Chronometer`.
 That test found the cause of the first build's **"Couldn't add widget"**: each header row ended
 in a bare `<View>` spacer, and `RemoteViews` only inflates classes annotated `@RemoteView`
 (`View` and `Space` are not), so the whole layout threw `InflateException` in the launcher's
@@ -104,8 +104,8 @@ process. The spacer is now a `FrameLayout`.
 ## Limitations
 
 - Third-party widgets cannot blur the wallpaper, so the cards are translucent rather than
-  frosted like the reference screenshots: translucent white for the light skin, translucent
-  near-black for the dark one. They will look washed out over a bright photo.
+  frosted like the reference screenshots. Over a bright photo the fill thins out and the ink
+  reads less well.
 - The committed APK is debug-signed. Installing a later build signed with a different key means
   uninstalling this one first.
 - Liber Resh and Planetary Hours refresh on a 15-minute floor, the smallest interval WorkManager
@@ -118,6 +118,5 @@ process. The spacer is now a `FrameLayout`.
 - `Astro.kt`: Astronomy Engine wrapper, phase naming, sign and degree helpers
 - `Lunar.kt`, `Resh.kt`, `Hours.kt`, `Thelemic.kt`: one panel builder each
 - `WidgetRender.kt`: computes, caches and paints the `RemoteViews`
-- `Widgets.kt`: the eight providers, light and dark; `WidgetScheduler.kt` and `RefreshWorker.kt`:
-  refresh timing
+- `Widgets.kt`: the four providers; `WidgetScheduler.kt` and `RefreshWorker.kt`: refresh timing
 - `Cache.kt`: last good state per widget, so a failed refresh never blanks a panel

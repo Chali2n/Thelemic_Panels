@@ -8,7 +8,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.Material.Light.NoActionBar">
+        android:theme="@android:style/Theme.Material.NoActionBar">
 
         <activity
             android:name=".MainActivity"
@@ -20,6 +20,9 @@
             </intent-filter>
         </activity>
 
+        <!-- The four dark panels. These class names are the ones the panels have
+             always used, so widgets already pinned keep their ids and repaint in
+             the dark palette instead of being dropped by the launcher. -->
         <receiver
             android:name=".ThelemicDateWidget"
             android:exported="true"
@@ -66,54 +69,6 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/hours_info" />
-        </receiver>
-
-        <receiver
-            android:name=".ThelemicDateDarkWidget"
-            android:exported="true"
-            android:label="@string/panel_date_dark">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/thelemic_date_dark_info" />
-        </receiver>
-
-        <receiver
-            android:name=".LunarDarkWidget"
-            android:exported="true"
-            android:label="@string/panel_lunar_dark">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/lunar_dark_info" />
-        </receiver>
-
-        <receiver
-            android:name=".ReshDarkWidget"
-            android:exported="true"
-            android:label="@string/panel_resh_dark">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/resh_dark_info" />
-        </receiver>
-
-        <receiver
-            android:name=".PlanetaryHoursDarkWidget"
-            android:exported="true"
-            android:label="@string/panel_hours_dark">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/hours_dark_info" />
         </receiver>
     </application>
 </manifest>

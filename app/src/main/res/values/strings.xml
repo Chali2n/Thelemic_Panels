@@ -7,37 +7,23 @@
     <string name="panel_resh">Liber Resh</string>
     <string name="panel_hours">Planetary Hours</string>
 
-    <string name="panel_date_dark">Thelemic Date (Dark)</string>
-    <string name="panel_lunar_dark">Lunar Calendar (Dark)</string>
-    <string name="panel_resh_dark">Liber Resh (Dark)</string>
-    <string name="panel_hours_dark">Planetary Hours (Dark)</string>
-
     <string name="panel_date_description">Sun and Moon by sign and degree, the Latin weekday, and the year of the New Aeon.</string>
     <string name="panel_lunar_description">Moon phase and illumination, the Moon\'s sign, and the next New and Full Moons.</string>
     <string name="panel_resh_description">The four solar adorations for Augusta, Maine: sunrise, noon, sunset and solar midnight.</string>
     <string name="panel_hours_description">The ruling planet of the current hour, with the hours that follow.</string>
 
-    <string name="panel_date_dark_description">Dark glass version of the Thelemic Date panel.</string>
-    <string name="panel_lunar_dark_description">Dark glass version of the Lunar Calendar panel.</string>
-    <string name="panel_resh_dark_description">Dark glass version of the Liber Resh panel.</string>
-    <string name="panel_hours_dark_description">Dark glass version of the Planetary Hours panel.</string>
-
     <string name="cta_era_legis">Open Era Legis</string>
     <string name="refreshing">Refreshing panels…</string>
     <string name="pin_unsupported">This launcher cannot pin widgets from an app. Add it from the widget picker instead.</string>
 
-    <string name="intro">Four panels computed for Augusta, Maine. Add them to your home screen:</string>
+    <string name="intro">Four dark-glass panels computed for Augusta, Maine. Add them to your home screen:</string>
     <string name="add_date">Add Thelemic Date</string>
     <string name="add_lunar">Add Lunar Calendar</string>
     <string name="add_resh">Add Liber Resh</string>
     <string name="add_hours">Add Planetary Hours</string>
-    <string name="dark_panels">Dark panels</string>
-    <string name="add_date_dark">Add Thelemic Date (dark)</string>
-    <string name="add_lunar_dark">Add Lunar Calendar (dark)</string>
-    <string name="add_resh_dark">Add Liber Resh (dark)</string>
-    <string name="add_hours_dark">Add Planetary Hours (dark)</string>
     <string name="refresh_now">Refresh now</string>
     <string name="footer">Times are America/New_York. Tap any panel to refresh it.</string>
+    <string name="version_footer">Version %1$s</string>
 
     <!-- Sample text for widget picker previews; replaced at runtime. -->
     <string name="sample_date">☉︎ in 16° Scorpii : ☽︎ in 11° Scorpii : dies Solis : Anno Ⅴⅹⅰⅰ æræ legis</string>

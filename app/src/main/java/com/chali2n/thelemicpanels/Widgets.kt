@@ -10,9 +10,6 @@ import android.os.Bundle
 abstract class PanelWidget : AppWidgetProvider() {
     protected abstract val kind: PanelKind
 
-    /** Dark providers override this; the layout and palette follow from it. */
-    protected open val skin: PanelSkin get() = PanelSkin.LIGHT
-
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -57,24 +54,4 @@ class ReshWidget : PanelWidget() {
 
 class PlanetaryHoursWidget : PanelWidget() {
     override val kind: PanelKind = PanelKind.HOURS
-}
-
-class ThelemicDateDarkWidget : PanelWidget() {
-    override val kind: PanelKind = PanelKind.DATE
-    override val skin: PanelSkin = PanelSkin.DARK
-}
-
-class LunarDarkWidget : PanelWidget() {
-    override val kind: PanelKind = PanelKind.LUNAR
-    override val skin: PanelSkin = PanelSkin.DARK
-}
-
-class ReshDarkWidget : PanelWidget() {
-    override val kind: PanelKind = PanelKind.RESH
-    override val skin: PanelSkin = PanelSkin.DARK
-}
-
-class PlanetaryHoursDarkWidget : PanelWidget() {
-    override val kind: PanelKind = PanelKind.HOURS
-    override val skin: PanelSkin = PanelSkin.DARK
 }
