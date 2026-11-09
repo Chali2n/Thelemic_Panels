@@ -45,12 +45,11 @@ object Resh {
             )
         }
 
-        val tiles = upcoming.take(4).mapIndexed { index, station ->
+        val tiles = upcoming.take(4).map { station ->
             Tile(
                 top = TimeFmt.clock(station.atMs),
                 mid = station.name,
                 bottom = station.label,
-                liveCountdownTo = if (index == 0) station.atMs else null,
             )
         }
 

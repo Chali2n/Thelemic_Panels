@@ -83,12 +83,11 @@ object Hours {
             )
         }
 
-        val tiles = upcoming.take(3).mapIndexed { index, hour ->
+        val tiles = upcoming.take(3).map { hour ->
             Tile(
                 top = TimeFmt.clock(hour.startMs),
                 mid = "${hour.glyph} ${hour.planet}",
                 bottom = "${hour.label} • follows ${hour.previousGlyph} ${hour.previousPlanet}",
-                liveCountdownTo = if (index == 0) hour.startMs else null,
             )
         }
 

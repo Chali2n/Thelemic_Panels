@@ -1,8 +1,12 @@
 package com.chali2n.thelemicpanels
 
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Chronometer
 import android.widget.FrameLayout
 import android.widget.TextView
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -56,6 +60,28 @@ class WidgetInflateTest {
                     }
             }
         }
+    }
+
+    /** Rows carry the wall-clock time only; nothing in a panel ticks between refreshes. */
+    @Test
+    fun noPanelContainsATickingClock() {
+        val context = RuntimeEnvironment.getApplication()
+        PanelKind.entries.forEach { kind ->
+            PanelSkin.entries.forEach { skin ->
+                val applied = WidgetRender.build(context, kind, skin, livePanel(kind), 1)
+                    .apply(context, FrameLayout(context))
+                assertFalse(
+                    "$kind/$skin still contains a Chronometer",
+                    containsChronometer(applied),
+                )
+            }
+        }
+    }
+
+    private fun containsChronometer(view: View): Boolean = when (view) {
+        is Chronometer -> true
+        is ViewGroup -> (0 until view.childCount).any { containsChronometer(view.getChildAt(it)) }
+        else -> false
     }
 
     /** The two skins share one layout structure, so they must differ only in palette. */

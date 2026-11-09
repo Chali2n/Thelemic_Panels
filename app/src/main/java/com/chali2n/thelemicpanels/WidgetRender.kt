@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
-import android.os.SystemClock
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
@@ -24,7 +23,6 @@ object WidgetRender {
     private class RowIds(
         val row: Int,
         val top: Int,
-        val countdown: Int,
         val mid: Int,
         val detail: Int,
     )
@@ -32,16 +30,16 @@ object WidgetRender {
     private class EventIds(val row: Int, val top: Int, val mid: Int)
 
     private val reshRows = listOf(
-        RowIds(R.id.row1, R.id.row1_time, R.id.row1_cd, R.id.row1_name, R.id.row1_detail),
-        RowIds(R.id.row2, R.id.row2_time, R.id.row2_cd, R.id.row2_name, R.id.row2_detail),
-        RowIds(R.id.row3, R.id.row3_time, R.id.row3_cd, R.id.row3_name, R.id.row3_detail),
-        RowIds(R.id.row4, R.id.row4_time, R.id.row4_cd, R.id.row4_name, R.id.row4_detail),
+        RowIds(R.id.row1, R.id.row1_time, R.id.row1_name, R.id.row1_detail),
+        RowIds(R.id.row2, R.id.row2_time, R.id.row2_name, R.id.row2_detail),
+        RowIds(R.id.row3, R.id.row3_time, R.id.row3_name, R.id.row3_detail),
+        RowIds(R.id.row4, R.id.row4_time, R.id.row4_name, R.id.row4_detail),
     )
 
     private val hoursRows = listOf(
-        RowIds(R.id.row1, R.id.row1_time, R.id.row1_cd, R.id.row1_name, R.id.row1_detail),
-        RowIds(R.id.row2, R.id.row2_time, R.id.row2_cd, R.id.row2_name, R.id.row2_detail),
-        RowIds(R.id.row3, R.id.row3_time, R.id.row3_cd, R.id.row3_name, R.id.row3_detail),
+        RowIds(R.id.row1, R.id.row1_time, R.id.row1_name, R.id.row1_detail),
+        RowIds(R.id.row2, R.id.row2_time, R.id.row2_name, R.id.row2_detail),
+        RowIds(R.id.row3, R.id.row3_time, R.id.row3_name, R.id.row3_detail),
     )
 
     private val lunarEvents = listOf(
@@ -237,7 +235,6 @@ object WidgetRender {
 
     private fun bindRows(views: RemoteViews, panel: Panel, capacity: Int) {
         val rows = if (panel.kind == PanelKind.RESH) reshRows else hoursRows
-        val now = System.currentTimeMillis()
 
         rows.forEachIndexed { index, ids ->
             val tile = panel.tiles.getOrNull(index)
@@ -254,16 +251,6 @@ object WidgetRender {
             } else {
                 views.setViewVisibility(ids.detail, View.VISIBLE)
                 views.setTextViewText(ids.detail, detail)
-            }
-
-            val target = tile.liveCountdownTo
-            if (target != null && target > now) {
-                val base = SystemClock.elapsedRealtime() + (target - now)
-                views.setChronometer(ids.countdown, base, " · in %s", true)
-                views.setChronometerCountDown(ids.countdown, true)
-                views.setViewVisibility(ids.countdown, View.VISIBLE)
-            } else {
-                views.setViewVisibility(ids.countdown, View.GONE)
             }
         }
 

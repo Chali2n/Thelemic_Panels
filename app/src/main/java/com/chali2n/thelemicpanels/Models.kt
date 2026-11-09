@@ -17,13 +17,11 @@ data class Seg(val text: String, val emphasis: Emphasis = Emphasis.NORMAL) {
  *
  * [top] is the small muted line (a clock time, a date, or a cell caption),
  * [mid] is the prominent line, [bottom] the small muted line beneath it.
- * When [liveCountdownTo] is set the top line grows a self-updating countdown.
  */
 data class Tile(
     val top: String,
     val mid: String,
     val bottom: String? = null,
-    val liveCountdownTo: Long? = null,
 )
 
 /**

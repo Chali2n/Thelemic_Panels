@@ -37,7 +37,6 @@ object Cache {
                     put("top", tile.top)
                     put("mid", tile.mid)
                     tile.bottom?.let { put("bottom", it) }
-                    tile.liveCountdownTo?.let { put("countdown", it) }
                 },
             )
         }
@@ -68,7 +67,6 @@ object Cache {
                 top = tile.getString("top"),
                 mid = tile.getString("mid"),
                 bottom = if (tile.has("bottom")) tile.getString("bottom") else null,
-                liveCountdownTo = if (tile.has("countdown")) tile.getLong("countdown") else null,
             )
         }
         return Panel(

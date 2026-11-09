@@ -65,28 +65,13 @@
         android:orientation="vertical"
         android:padding="9dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/row1_time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/row1_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sample_resh_time"
-                android:textColor="@color/ink_muted"
-                android:textSize="11sp" />
-
-            <Chronometer
-                android:id="@+id/row1_cd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/ink_muted"
-                android:textSize="11sp"
-                android:visibility="gone" />
-        </LinearLayout>
+            android:text="@string/sample_resh_time"
+            android:textColor="@color/ink_muted"
+            android:textSize="11sp" />
 
         <TextView
             android:id="@+id/row1_name"
@@ -117,28 +102,13 @@
         android:orientation="vertical"
         android:padding="9dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/row2_time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/row2_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sample_resh_time"
-                android:textColor="@color/ink_muted"
-                android:textSize="11sp" />
-
-            <Chronometer
-                android:id="@+id/row2_cd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/ink_muted"
-                android:textSize="11sp"
-                android:visibility="gone" />
-        </LinearLayout>
+            android:text="@string/sample_resh_time"
+            android:textColor="@color/ink_muted"
+            android:textSize="11sp" />
 
         <TextView
             android:id="@+id/row2_name"
@@ -169,28 +139,13 @@
         android:orientation="vertical"
         android:padding="9dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/row3_time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/row3_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sample_resh_time"
-                android:textColor="@color/ink_muted"
-                android:textSize="11sp" />
-
-            <Chronometer
-                android:id="@+id/row3_cd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/ink_muted"
-                android:textSize="11sp"
-                android:visibility="gone" />
-        </LinearLayout>
+            android:text="@string/sample_resh_time"
+            android:textColor="@color/ink_muted"
+            android:textSize="11sp" />
 
         <TextView
             android:id="@+id/row3_name"
@@ -221,28 +176,13 @@
         android:orientation="vertical"
         android:padding="9dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/row4_time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/row4_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sample_resh_time"
-                android:textColor="@color/ink_muted"
-                android:textSize="11sp" />
-
-            <Chronometer
-                android:id="@+id/row4_cd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/ink_muted"
-                android:textSize="11sp"
-                android:visibility="gone" />
-        </LinearLayout>
+            android:text="@string/sample_resh_time"
+            android:textColor="@color/ink_muted"
+            android:textSize="11sp" />
 
         <TextView
             android:id="@+id/row4_name"

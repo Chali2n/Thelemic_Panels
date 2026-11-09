@@ -5,14 +5,14 @@ Four Android home-screen widgets for Augusta, Maine (44.3106, -69.7795, `America
 1. **Thelemic Date**: today's date in Thelemic style, with the Sun and Moon by sign and degree, the Latin weekday, and the year of the New Aeon. Updates every 2 hours.
 2. **Lunar Calendar**: the Moon's phase, how much of it is lit, and its sign, plus the next New and Full Moons. Updates every 6 hours.
 3. **Liber Resh**: today's four adoration times for Augusta: sunrise, noon, sunset and midnight.
-4. **Planetary Hours**: the planet ruling the current hour, with a countdown to the next ones, using the traditional Chaldean order.
+4. **Planetary Hours**: the planet ruling the current hour, how long until the next begins, then the hours after it, using the traditional Chaldean order.
 
 ## Install
 
 A debug build is committed here as
-[thelemic-panels-1.2-debug.apk](thelemic-panels-1.2-debug.apk), so it can be sideloaded without a
+[thelemic-panels-1.3-debug.apk](thelemic-panels-1.3-debug.apk), so it can be sideloaded without a
 toolchain: download it on the phone, tap it, and allow "install unknown apps" for whichever app
-opens it. With a cable: `adb install -r thelemic-panels-1.2-debug.apk`. Android 8.0 (API 26) or
+opens it. With a cable: `adb install -r thelemic-panels-1.3-debug.apk`. Android 8.0 (API 26) or
 newer. It installs over an earlier build as an update, since every build is signed with the same
 debug key.
 
@@ -40,8 +40,10 @@ echo "sdk.dir=$ANDROID_HOME" > local.properties
   so the line stays exactly as Era Legis writes it, character for character.
 - Each panel caches its last good render and repaints from that cache if a refresh fails, so
   a panel never blanks.
-- Countdowns are `Chronometer` views set to count down, so they tick every second without the
-  app being awake.
+- Rows show the wall-clock time a station or hour begins, not a running countdown: the headline
+  line above already says how long until the next one, and a static label would drift out of
+  date between the 15-minute refreshes. Nothing in a panel ticks, so nothing is drawn while the
+  screen is off.
 - Planetary days run sunrise to sunrise. Each day and night is split into twelve unequal
   hours; hour 1 of the day belongs to the weekday's planet and the rest follow the Chaldean
   order: ♄ ♃ ♂ ☉ ♀ ☿ ☽.
@@ -72,13 +74,13 @@ more or fewer rows.
 |---|---|---|
 | Thelemic Date | 4×2 | the four-part line and the Era Legis button |
 | Lunar Calendar | 4×3 | headline, phase and sign cells, next New and Full Moons |
-| Liber Resh | 4×4 | next adoration with a live countdown, then the following ones |
-| Planetary Hours | 4×3 | next hour with a live countdown, then the two after it |
+| Liber Resh | 4×4 | how long until the next adoration, then the coming ones |
+| Planetary Hours | 4×3 | how long until the next hour, then the two after it |
 
 ## Testing
 
-`./gradlew :app:testDebugUnitTest` runs 16 JVM tests: 14 astronomy checks in
-[AstronomyTest.kt](app/src/test/java/com/chali2n/thelemicpanels/AstronomyTest.kt) and 2 widget
+`./gradlew :app:testDebugUnitTest` runs 17 JVM tests: 14 astronomy checks in
+[AstronomyTest.kt](app/src/test/java/com/chali2n/thelemicpanels/AstronomyTest.kt) and 3 widget
 checks in `WidgetInflateTest.kt`. The astronomy tests pin one past reading for Augusta, a Sunday
 at 16:19, so they never drift with the calendar: sunrise 6:27 AM, sunset 4:19 PM, solar noon and solar midnight, the Moon at 11° Scorpii and under 1%
 lit, the next New Moon, the named Full Moon, the four Resh stations, the whole 24-hour Chaldean
@@ -92,7 +94,8 @@ and the rest of the month reads Waxing/Waning Crescent, Quarter or Gibbous.
 [WidgetInflateTest.kt](app/src/test/java/com/chali2n/thelemicpanels/WidgetInflateTest.kt) runs
 each panel's `RemoteViews`, in both skins and both as a placeholder and with live data, through
 `apply()` under Robolectric, which is what a launcher does; it also checks that each skin paints
-its own ink, so a missing colour in a dark layout fails the build.
+its own ink, so a missing colour in a dark layout fails the build, and that no panel ships a
+`Chronometer`.
 That test found the cause of the first build's **"Couldn't add widget"**: each header row ended
 in a bare `<View>` spacer, and `RemoteViews` only inflates classes annotated `@RemoteView`
 (`View` and `Space` are not), so the whole layout threw `InflateException` in the launcher's
