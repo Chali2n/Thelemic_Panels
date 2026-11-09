@@ -26,6 +26,12 @@ data class Tile(
     val liveCountdownTo: Long? = null,
 )
 
+/**
+ * Light and dark renderings of the same panel. A skin changes only layout and
+ * palette, so both skins share one computation and one cache entry per kind.
+ */
+enum class PanelSkin { LIGHT, DARK }
+
 enum class PanelKind(val key: String) {
     DATE("date"),
     LUNAR("lunar"),

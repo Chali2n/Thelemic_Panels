@@ -6,9 +6,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 
-/** Base behaviour shared by the four panels: schedule, refresh on tap, refresh on resize. */
+/** Base behaviour shared by every panel: schedule, refresh on tap, refresh on resize. */
 abstract class PanelWidget : AppWidgetProvider() {
     protected abstract val kind: PanelKind
+
+    /** Dark providers override this; the layout and palette follow from it. */
+    protected open val skin: PanelSkin get() = PanelSkin.LIGHT
 
     override fun onUpdate(
         context: Context,
@@ -54,4 +57,24 @@ class ReshWidget : PanelWidget() {
 
 class PlanetaryHoursWidget : PanelWidget() {
     override val kind: PanelKind = PanelKind.HOURS
+}
+
+class ThelemicDateDarkWidget : PanelWidget() {
+    override val kind: PanelKind = PanelKind.DATE
+    override val skin: PanelSkin = PanelSkin.DARK
+}
+
+class LunarDarkWidget : PanelWidget() {
+    override val kind: PanelKind = PanelKind.LUNAR
+    override val skin: PanelSkin = PanelSkin.DARK
+}
+
+class ReshDarkWidget : PanelWidget() {
+    override val kind: PanelKind = PanelKind.RESH
+    override val skin: PanelSkin = PanelSkin.DARK
+}
+
+class PlanetaryHoursDarkWidget : PanelWidget() {
+    override val kind: PanelKind = PanelKind.HOURS
+    override val skin: PanelSkin = PanelSkin.DARK
 }

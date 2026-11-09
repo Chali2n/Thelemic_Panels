@@ -2,6 +2,7 @@ package com.chali2n.thelemicpanels
 
 import android.widget.FrameLayout
 import android.widget.TextView
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -11,7 +12,8 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 /**
- * Every panel must survive being inflated and applied the way a launcher does it.
+ * Every panel, in both skins, must survive being inflated and applied the way a
+ * launcher does it.
  *
  * A RemoteViews action aimed at an id missing from that panel's layout, or an
  * unsupported view, throws here; on the device the same throw shows up as the
@@ -37,17 +39,37 @@ class WidgetInflateTest {
     fun everyPanelAppliesTheWayALauncherAppliesIt() {
         val context = RuntimeEnvironment.getApplication()
         PanelKind.entries.forEach { kind ->
-            // The placeholder is what the launcher sees on the very first bind,
-            // before any refresh has run, so it has to inflate too.
-            listOf("placeholder" to WidgetRender.placeholder(kind), "live" to livePanel(kind))
-                .forEach { (label, panel) ->
-                    val views = WidgetRender.build(context, kind, panel, 1)
-                    val applied = views.apply(context, FrameLayout(context))
-                    assertNotNull("$kind ($label) produced no view", applied)
+            PanelSkin.entries.forEach { skin ->
+                // The placeholder is what the launcher sees on the very first bind,
+                // before any refresh has run, so it has to inflate too.
+                listOf("placeholder" to WidgetRender.placeholder(kind), "live" to livePanel(kind))
+                    .forEach { (label, panel) ->
+                        val views = WidgetRender.build(context, kind, skin, panel, 1)
+                        val applied = views.apply(context, FrameLayout(context))
+                        assertNotNull("$kind/$skin ($label) produced no view", applied)
 
-                    val summary = applied.findViewById<TextView>(R.id.panel_summary)
-                    assertTrue("$kind ($label) has no summary text", !summary.text.isNullOrEmpty())
-                }
+                        val summary = applied.findViewById<TextView>(R.id.panel_summary)
+                        assertTrue(
+                            "$kind/$skin ($label) has no summary text",
+                            !summary.text.isNullOrEmpty(),
+                        )
+                    }
+            }
         }
+    }
+
+    /** The two skins share one layout structure, so they must differ only in palette. */
+    @Test
+    fun eachSkinPaintsItsOwnInk() {
+        val context = RuntimeEnvironment.getApplication()
+        val panel = WidgetRender.placeholder(PanelKind.HOURS)
+
+        fun titleColor(skin: PanelSkin): Int = WidgetRender.build(context, PanelKind.HOURS, skin, panel, 1)
+            .apply(context, FrameLayout(context))
+            .findViewById<TextView>(R.id.panel_title)
+            .currentTextColor
+
+        assertEquals(context.getColor(R.color.ink_soft), titleColor(PanelSkin.LIGHT))
+        assertEquals(context.getColor(R.color.ink_soft_dark), titleColor(PanelSkin.DARK))
     }
 }

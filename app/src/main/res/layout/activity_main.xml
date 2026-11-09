@@ -54,6 +54,43 @@
             android:layout_marginTop="6dp"
             android:text="@string/add_hours" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/dark_panels"
+            android:textColor="@color/ink_muted"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/pin_date_dark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/add_date_dark" />
+
+        <Button
+            android:id="@+id/pin_lunar_dark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/add_lunar_dark" />
+
+        <Button
+            android:id="@+id/pin_resh_dark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/add_resh_dark" />
+
+        <Button
+            android:id="@+id/pin_hours_dark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/add_hours_dark" />
+
         <Button
             android:id="@+id/refresh"
             android:layout_width="match_parent"

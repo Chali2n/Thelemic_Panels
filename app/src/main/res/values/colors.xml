@@ -6,4 +6,12 @@
     <color name="tile_fill">#8CFFFFFF</color>
     <color name="cta_fill">#A8FFFFFF</color>
     <color name="launcher_bg">#1B2A4A</color>
+
+    <!-- Dark panels: the same glass, tinted almost black. Chroma is kept low so
+         wallpaper colour still reads through; these are near-white, not grey. -->
+    <color name="ink_dark">#F3F0F9</color>
+    <color name="ink_soft_dark">#D6D1E0</color>
+    <color name="ink_muted_dark">#A29CAE</color>
+    <color name="tile_fill_dark">#24FFFFFF</color>
+    <color name="cta_fill_dark">#2EFFFFFF</color>
 </resources>

@@ -49,32 +49,59 @@ object WidgetRender {
         EventIds(R.id.event2, R.id.event2_top, R.id.event2_mid),
     )
 
-    fun providerFor(kind: PanelKind): Class<*> = when (kind) {
-        PanelKind.DATE -> ThelemicDateWidget::class.java
-        PanelKind.LUNAR -> LunarWidget::class.java
-        PanelKind.RESH -> ReshWidget::class.java
-        PanelKind.HOURS -> PlanetaryHoursWidget::class.java
+    fun providerFor(kind: PanelKind, skin: PanelSkin): Class<*> = when (skin) {
+        PanelSkin.LIGHT -> when (kind) {
+            PanelKind.DATE -> ThelemicDateWidget::class.java
+            PanelKind.LUNAR -> LunarWidget::class.java
+            PanelKind.RESH -> ReshWidget::class.java
+            PanelKind.HOURS -> PlanetaryHoursWidget::class.java
+        }
+
+        PanelSkin.DARK -> when (kind) {
+            PanelKind.DATE -> ThelemicDateDarkWidget::class.java
+            PanelKind.LUNAR -> LunarDarkWidget::class.java
+            PanelKind.RESH -> ReshDarkWidget::class.java
+            PanelKind.HOURS -> PlanetaryHoursDarkWidget::class.java
+        }
     }
 
-    private fun layoutFor(kind: PanelKind): Int = when (kind) {
-        PanelKind.DATE -> R.layout.widget_date
-        PanelKind.LUNAR -> R.layout.widget_lunar
-        PanelKind.RESH -> R.layout.widget_resh
-        PanelKind.HOURS -> R.layout.widget_hours
+    private fun layoutFor(kind: PanelKind, skin: PanelSkin): Int = when (skin) {
+        PanelSkin.LIGHT -> when (kind) {
+            PanelKind.DATE -> R.layout.widget_date
+            PanelKind.LUNAR -> R.layout.widget_lunar
+            PanelKind.RESH -> R.layout.widget_resh
+            PanelKind.HOURS -> R.layout.widget_hours
+        }
+
+        PanelSkin.DARK -> when (kind) {
+            PanelKind.DATE -> R.layout.widget_date_dark
+            PanelKind.LUNAR -> R.layout.widget_lunar_dark
+            PanelKind.RESH -> R.layout.widget_resh_dark
+            PanelKind.HOURS -> R.layout.widget_hours_dark
+        }
     }
 
-    /** Recompute one panel and repaint every widget instance of it. */
+    /**
+     * Recompute one panel once, then repaint every instance of it in both skins.
+     * The two skins hold separate widget ids but share the computation and cache.
+     */
     fun updateAll(context: Context, kind: PanelKind) {
         val manager = AppWidgetManager.getInstance(context)
-        val ids = manager.getAppWidgetIds(ComponentName(context, providerFor(kind)))
-        if (ids.isEmpty()) return
+        val targets = PanelSkin.entries
+            .map { skin ->
+                skin to manager.getAppWidgetIds(ComponentName(context, providerFor(kind, skin)))
+            }
+            .filter { (_, ids) -> ids.isNotEmpty() }
+        if (targets.isEmpty()) return
 
         val now = System.currentTimeMillis()
         val fresh = runCatching { compute(kind, now) }.getOrNull()
         if (fresh != null) Cache.save(context, fresh)
         val panel = fresh ?: Cache.load(context, kind) ?: placeholder(kind)
 
-        ids.forEach { id -> manager.updateAppWidget(id, build(context, kind, panel, id)) }
+        targets.forEach { (skin, ids) ->
+            ids.forEach { id -> manager.updateAppWidget(id, build(context, kind, skin, panel, id)) }
+        }
     }
 
     private fun compute(kind: PanelKind, nowMs: Long): Panel = when (kind) {
@@ -95,12 +122,13 @@ object WidgetRender {
     internal fun build(
         context: Context,
         kind: PanelKind,
+        skin: PanelSkin,
         panel: Panel,
         appWidgetId: Int,
     ): RemoteViews {
-        val views = RemoteViews(context.packageName, layoutFor(kind))
-        bindSummary(context, views, panel)
-        bindRefresh(context, views, kind)
+        val views = RemoteViews(context.packageName, layoutFor(kind, skin))
+        bindSummary(context, views, panel, skin)
+        bindRefresh(context, views, kind, skin)
 
         when (kind) {
             PanelKind.DATE -> bindDate(context, views, panel)
@@ -111,9 +139,16 @@ object WidgetRender {
         return views
     }
 
-    private fun bindSummary(context: Context, views: RemoteViews, panel: Panel) {
+    private fun bindSummary(
+        context: Context,
+        views: RemoteViews,
+        panel: Panel,
+        skin: PanelSkin,
+    ) {
         val builder = SpannableStringBuilder()
-        val muted = context.getColor(R.color.ink_muted)
+        val muted = context.getColor(
+            if (skin == PanelSkin.DARK) R.color.ink_muted_dark else R.color.ink_muted,
+        )
         panel.summary.forEach { seg ->
             val start = builder.length
             builder.append(seg.text)
@@ -135,8 +170,13 @@ object WidgetRender {
     }
 
     /** Tapping a panel refreshes it; the button on the date panel opens Era Legis. */
-    private fun bindRefresh(context: Context, views: RemoteViews, kind: PanelKind) {
-        val intent = Intent(context, providerFor(kind)).setAction(WidgetScheduler.ACTION_REFRESH)
+    private fun bindRefresh(
+        context: Context,
+        views: RemoteViews,
+        kind: PanelKind,
+        skin: PanelSkin,
+    ) {
+        val intent = Intent(context, providerFor(kind, skin)).setAction(WidgetScheduler.ACTION_REFRESH)
         views.setOnClickPendingIntent(
             R.id.panel_root,
             PendingIntent.getBroadcast(

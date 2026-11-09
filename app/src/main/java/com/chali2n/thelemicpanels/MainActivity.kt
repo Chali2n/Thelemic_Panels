@@ -20,6 +20,10 @@ class MainActivity : Activity() {
         pin(R.id.pin_lunar, LunarWidget::class.java, manager)
         pin(R.id.pin_resh, ReshWidget::class.java, manager)
         pin(R.id.pin_hours, PlanetaryHoursWidget::class.java, manager)
+        pin(R.id.pin_date_dark, ThelemicDateDarkWidget::class.java, manager)
+        pin(R.id.pin_lunar_dark, LunarDarkWidget::class.java, manager)
+        pin(R.id.pin_resh_dark, ReshDarkWidget::class.java, manager)
+        pin(R.id.pin_hours_dark, PlanetaryHoursDarkWidget::class.java, manager)
 
         findViewById<Button>(R.id.refresh).setOnClickListener {
             PanelKind.entries.forEach { WidgetScheduler.refreshNow(this, it) }
