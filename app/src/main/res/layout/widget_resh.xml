@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/roboto_medium"
             android:text="@string/panel_resh"
             android:textColor="@color/ink_soft"
             android:textSize="14sp" />
@@ -54,7 +54,9 @@
         android:lineSpacingExtra="3dp"
         android:text="@string/sample_resh_summary"
         android:textColor="@color/ink_soft"
-        android:textSize="14sp" />
+        android:textSize="14sp" 
+        android:fontFamily="@font/roboto_regular"
+    />
 
     <LinearLayout
         android:id="@+id/row1"
@@ -71,14 +73,16 @@
             android:layout_height="wrap_content"
             android:text="@string/sample_resh_time"
             android:textColor="@color/ink_muted"
-            android:textSize="11sp" />
+            android:textSize="11sp" 
+            android:fontFamily="@font/roboto_regular"
+        />
 
         <TextView
             android:id="@+id/row1_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/roboto_medium"
             android:text="@string/sample_resh_name"
             android:textColor="@color/ink"
             android:textSize="16sp" />
@@ -90,7 +94,9 @@
             android:layout_marginTop="1dp"
             android:text="@string/sample_resh_detail"
             android:textColor="@color/ink_muted"
-            android:textSize="11sp" />
+            android:textSize="11sp" 
+            android:fontFamily="@font/roboto_regular"
+        />
     </LinearLayout>
 
     <LinearLayout
@@ -108,14 +114,16 @@
             android:layout_height="wrap_content"
             android:text="@string/sample_resh_time"
             android:textColor="@color/ink_muted"
-            android:textSize="11sp" />
+            android:textSize="11sp" 
+            android:fontFamily="@font/roboto_regular"
+        />
 
         <TextView
             android:id="@+id/row2_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/roboto_medium"
             android:text="@string/sample_resh_name"
             android:textColor="@color/ink"
             android:textSize="16sp" />
@@ -127,7 +135,9 @@
             android:layout_marginTop="1dp"
             android:text="@string/sample_resh_detail"
             android:textColor="@color/ink_muted"
-            android:textSize="11sp" />
+            android:textSize="11sp" 
+            android:fontFamily="@font/roboto_regular"
+        />
     </LinearLayout>
 
     <LinearLayout
@@ -145,14 +155,16 @@
             android:layout_height="wrap_content"
             android:text="@string/sample_resh_time"
             android:textColor="@color/ink_muted"
-            android:textSize="11sp" />
+            android:textSize="11sp" 
+            android:fontFamily="@font/roboto_regular"
+        />
 
         <TextView
             android:id="@+id/row3_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/roboto_medium"
             android:text="@string/sample_resh_name"
             android:textColor="@color/ink"
             android:textSize="16sp" />
@@ -164,7 +176,9 @@
             android:layout_marginTop="1dp"
             android:text="@string/sample_resh_detail"
             android:textColor="@color/ink_muted"
-            android:textSize="11sp" />
+            android:textSize="11sp" 
+            android:fontFamily="@font/roboto_regular"
+        />
     </LinearLayout>
 
     <LinearLayout
@@ -182,14 +196,16 @@
             android:layout_height="wrap_content"
             android:text="@string/sample_resh_time"
             android:textColor="@color/ink_muted"
-            android:textSize="11sp" />
+            android:textSize="11sp" 
+            android:fontFamily="@font/roboto_regular"
+        />
 
         <TextView
             android:id="@+id/row4_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/roboto_medium"
             android:text="@string/sample_resh_name"
             android:textColor="@color/ink"
             android:textSize="16sp" />
@@ -201,7 +217,9 @@
             android:layout_marginTop="1dp"
             android:text="@string/sample_resh_detail"
             android:textColor="@color/ink_muted"
-            android:textSize="11sp" />
+            android:textSize="11sp" 
+            android:fontFamily="@font/roboto_regular"
+        />
     </LinearLayout>
 
     <TextView
@@ -211,5 +229,7 @@
         android:layout_marginTop="8dp"
         android:textColor="@color/ink_muted"
         android:textSize="13sp"
-        android:visibility="gone" />
+        android:visibility="gone" 
+        android:fontFamily="@font/roboto_regular"
+    />
 </LinearLayout>

@@ -2,7 +2,7 @@
 
 Four Android home-screen widgets for Augusta, Maine (44.3106, -69.7795, `America/New_York`).
 
-1. **Thelemic Date**: today's date in Thelemic style, with the Sun and Moon by sign and degree, the Latin weekday, and the year of the New Aeon. Updates every 2 hours.
+1. **Era Legis**: today's date in Thelemic style, with the Sun and Moon by sign and degree, the Latin weekday, and the year of the New Aeon. Updates every 2 hours.
 2. **Lunar Calendar**: the Moon's phase, how much of it is lit, and its sign, plus the next New and Full Moons. Updates every 6 hours.
 3. **Liber Resh**: today's four adoration times for Augusta: sunrise, noon, sunset and midnight.
 4. **Planetary Hours**: the planet ruling the current hour, how long until the next begins, then the hours after it, using the traditional Chaldean order.
@@ -10,9 +10,9 @@ Four Android home-screen widgets for Augusta, Maine (44.3106, -69.7795, `America
 ## Install
 
 A debug build is committed here as
-[thelemic-panels-1.4-dark-debug.apk](thelemic-panels-1.4-dark-debug.apk), so it can be sideloaded
+[thelemic-panels-1.5-debug.apk](thelemic-panels-1.5-debug.apk), so it can be sideloaded
 without a toolchain: download it on the phone, tap it, and allow "install unknown apps" for
-whichever app opens it. With a cable: `adb install -r thelemic-panels-1.4-dark-debug.apk`.
+whichever app opens it. With a cable: `adb install -r thelemic-panels-1.5-debug.apk`.
 Android 8.0 (API 26) or newer. It installs over an earlier build as an update, since every build is
 signed with the same debug key. The app screen shows the installed version at the bottom.
 
@@ -35,7 +35,7 @@ echo "sdk.dir=$ANDROID_HOME" > local.properties
   (`io.github.cosinekitty:astronomy`): sunrise, sunset, solar noon, the Moon's ecliptic
   longitude, phase angle and illumination, the next New and Full Moon, and sign ingresses.
   Nothing is scraped, so all four panels work offline.
-- **Thelemic Date** is the one networked panel. It reads `plain` from
+- **Era Legis** is the one networked panel. It reads `plain` from
   `https://date.eralegis.info/now?format=json&tz=America/New_York&location=44.31:-69.78`
   so the line stays exactly as Era Legis writes it, character for character.
 - Each panel caches its last good render and repaints from that cache if a refresh fails, so
@@ -60,9 +60,13 @@ The panels kept their original provider class names when the light ones were dro
 already pinned to a home screen keep their ids and simply repaint dark instead of being removed by
 the launcher.
 
+The type is Roboto: Regular for body text, Medium for titles and tile labels, both bundled in
+`res/font` and referenced as `@font/roboto_regular` / `@font/roboto_medium` rather than left to the
+system default, which some phones replace with an OEM face.
+
 ### Refresh cadence
 
-Thelemic Date every 2 hours and Lunar Calendar every 6 hours, as specified. **Liber Resh and
+Era Legis every 2 hours and Lunar Calendar every 6 hours, as specified. **Liber Resh and
 Planetary Hours refresh every 15 minutes instead of daily/6-hourly**, because they are ordered
 lists that must drop an adoration or an hour as soon as its time passes; a static render would
 still be showing yesterday's sunrise the next morning. The work is local arithmetic with no
@@ -73,7 +77,7 @@ more or fewer rows.
 
 | Panel | Size | Shows |
 |---|---|---|
-| Thelemic Date | 4×2 | the four-part line and the Era Legis button |
+| Era Legis | 4×2 | the four-part line and the Era Legis button |
 | Lunar Calendar | 4×3 | headline, phase and sign cells, next New and Full Moons |
 | Liber Resh | 4×4 | how long until the next adoration, then the coming ones |
 | Planetary Hours | 4×3 | how long until the next hour, then the two after it |

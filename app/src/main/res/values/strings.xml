@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Thelemic Panels</string>
 
-    <string name="panel_date">Thelemic Date</string>
+    <string name="panel_date">Era Legis</string>
     <string name="panel_lunar">Lunar Calendar</string>
     <string name="panel_resh">Liber Resh</string>
     <string name="panel_hours">Planetary Hours</string>
@@ -17,7 +17,7 @@
     <string name="pin_unsupported">This launcher cannot pin widgets from an app. Add it from the widget picker instead.</string>
 
     <string name="intro">Four dark-glass panels computed for Augusta, Maine. Add them to your home screen:</string>
-    <string name="add_date">Add Thelemic Date</string>
+    <string name="add_date">Add Era Legis</string>
     <string name="add_lunar">Add Lunar Calendar</string>
     <string name="add_resh">Add Liber Resh</string>
     <string name="add_hours">Add Planetary Hours</string>

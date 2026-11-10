@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/roboto_medium"
             android:text="@string/panel_lunar"
             android:textColor="@color/ink_soft"
             android:textSize="14sp" />
@@ -54,7 +54,9 @@
         android:lineSpacingExtra="3dp"
         android:text="@string/sample_lunar_summary"
         android:textColor="@color/ink_soft"
-        android:textSize="15sp" />
+        android:textSize="15sp" 
+        android:fontFamily="@font/roboto_regular"
+    />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -77,14 +79,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sample_lunar_phase"
                 android:textColor="@color/ink_muted"
-                android:textSize="11sp" />
+                android:textSize="11sp" 
+                android:fontFamily="@font/roboto_regular"
+            />
 
             <TextView
                 android:id="@+id/stat1_mid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/roboto_medium"
                 android:text="@string/sample_lunar_lit"
                 android:textColor="@color/ink"
                 android:textSize="19sp" />
@@ -106,14 +110,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sample_lunar_sign_caption"
                 android:textColor="@color/ink_muted"
-                android:textSize="11sp" />
+                android:textSize="11sp" 
+                android:fontFamily="@font/roboto_regular"
+            />
 
             <TextView
                 android:id="@+id/stat2_mid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/roboto_medium"
                 android:text="@string/sample_lunar_sign"
                 android:textColor="@color/ink"
                 android:textSize="19sp" />
@@ -135,14 +141,16 @@
             android:layout_height="wrap_content"
             android:text="@string/sample_lunar_new_when"
             android:textColor="@color/ink_muted"
-            android:textSize="11sp" />
+            android:textSize="11sp" 
+            android:fontFamily="@font/roboto_regular"
+        />
 
         <TextView
             android:id="@+id/event1_mid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/roboto_medium"
             android:text="@string/sample_lunar_new"
             android:textColor="@color/ink"
             android:textSize="14sp" />
@@ -163,14 +171,16 @@
             android:layout_height="wrap_content"
             android:text="@string/sample_lunar_full_when"
             android:textColor="@color/ink_muted"
-            android:textSize="11sp" />
+            android:textSize="11sp" 
+            android:fontFamily="@font/roboto_regular"
+        />
 
         <TextView
             android:id="@+id/event2_mid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/roboto_medium"
             android:text="@string/sample_lunar_full"
             android:textColor="@color/ink"
             android:textSize="14sp" />
@@ -183,5 +193,7 @@
         android:layout_marginTop="8dp"
         android:textColor="@color/ink_muted"
         android:textSize="13sp"
-        android:visibility="gone" />
+        android:visibility="gone" 
+        android:fontFamily="@font/roboto_regular"
+    />
 </LinearLayout>
